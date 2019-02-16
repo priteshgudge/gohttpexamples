@@ -1,0 +1,15 @@
+sh build.sh
+docker build --target app -f Dockerfile -t asia.gcr.io/pritesh-sample-1/testapplication:dev_0.0.1 .
+docker push asia.gcr.io/pritesh-sample-1/testapplication:dev_0.0.1
+
+docker run -p 8080:8080 asia.gcr.io/pritesh-sample-1/testapplication:dev_0.0.1
+http://localhost:8080/ping/
+
+#Kubernetes
+# gcloud container clusters get-credentials test-cluster --zone=asia-south1-a
+# gcloud compute firewall-rules create my-rule --allow=tcp:8011
+# kubectl get pods
+# kubectl get services
+# kubectl apply -f file.yml
+# kubectl delete service ...
+# kubectl logs -f --tail 100 pod_id
