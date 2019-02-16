@@ -44,7 +44,7 @@ func ValidateUserCreateUpdateRequest(rStr string) (bool, error) {
 	result, err := gojsonschema.Validate(schema, content)
 
 	if err != nil {
-		logger.Fatalf("Invalid Json Schema Error: %v", err)
+		logger.Println("Invalid Json Schema Error: %v", err)
 		return false, customerrors.InternalError(fmt.Sprintf("Invalid Json Schema Error: %v", err))
 		//panic(err)
 	}

@@ -89,7 +89,7 @@ func (p *UserCrudHandler) Post(r *http.Request) resputl.SrvcRes {
 	userObj := f.NewUser(requestdata.FirstName, requestdata.LastName, requestdata.Age)
 	id, err := p.usersvc.Create(userObj)
 	if err != nil {
-		logger.Fatalf("Error while creating in DB: %v", err)
+		logger.Print("Error while creating in DB: %v", err)
 		return resputl.ProcessError(customerrors.UnprocessableEntityError("Error in writing to DB"), "")
 	}
 

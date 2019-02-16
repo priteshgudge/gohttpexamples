@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sampleapplication
+  labels:
+    app: sampleapplication
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+
+  selector:
+    matchLabels:
+      app: sampleapplication
+  template:
+    metadata:
+      labels:
+        app: sampleapplication
+    spec:
+      containers:
+      - name: sampleapplication
+        image: asia.gcr.io/pritesh-sample-1/testapplication:dev_0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8011
+          name: service-port
+        env:
+          - name: ENVIRONMENT
+            value: dev
+          # - name: CONFIG_FILE
+          #   value: /root/b2bapplication/config/devconfig.ini
+          # - name: MONGO_HOST
+          #   value: mongodb-service.default.svc.cluster.local
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sampleapplicationservice
+  labels:
+    app: sampleapplicationservice
+spec:
+  selector:
+    app: sampleapplication
+  ports:
+  - port: 8011
+    targetPort: 8011
+    name: service-port
+  type: LoadBalancer
+  # loadBalancerSourceRanges:
+  # - 0.0.0.0/32

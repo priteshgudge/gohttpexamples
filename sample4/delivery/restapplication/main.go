@@ -37,5 +37,5 @@ func main() {
 	h.Handle("/user/", hndlr)
 
 	logger.Println("Resource Setup Done.")
-	logger.Fatal(http.ListenAndServe(":8080", h))
+	logger.Println(http.ListenAndServe(":8011", h))
 }
